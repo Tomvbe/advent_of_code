@@ -9,7 +9,7 @@ public class Day1App {
         final SonarReader reader = new SonarReader("src/main/resources/depth_input.txt");
         final List<Integer> depthReadings = reader.read();
 
-        final int depthIncreases = new SonarSweeper().findDepthIncreases(depthReadings);
+        final int depthIncreases = new SonarSweeper().findDepthIncreases(depthReadings, 3);
 
         System.out.printf("There are %d depth increases", depthIncreases);
     }

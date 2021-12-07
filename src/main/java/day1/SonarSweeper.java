@@ -1,30 +1,28 @@
 package day1;
 
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.List;
-
-import static org.apache.commons.lang3.Validate.notNull;
 
 public class SonarSweeper {
 
-    int findDepthIncreases(List<Integer> depthMeasurements) {
-        return findDepthIncreases(new ArrayDeque<>(depthMeasurements), 0);
-    }
-
-    private int findDepthIncreases(@Nullable Deque<Integer> depthMeasurements, int count) {
-        if (depthMeasurements == null || depthMeasurements.size() < 2) {
-            return count;
+    int findDepthIncreases(@NotNull List<Integer> depthMeasurements, int depth) {
+        if (depthMeasurements.size() < depth + 1) {
+            return 0;
         }
 
-        final int firstValue = depthMeasurements.pollFirst();
-        final int secondValue = notNull(depthMeasurements.peekFirst());
-        if (firstValue < secondValue) {
-            count++;
+        int count = 0;
+
+        for (int i = 0; i < depthMeasurements.size() - depth; i++) {
+            int first = depthMeasurements.get(i);
+            int second = depthMeasurements.get(i + depth);
+
+            if (second > first) {
+                count++;
+            }
         }
 
-        return findDepthIncreases(depthMeasurements, count);
+        return count;
     }
+
 }
